@@ -5,10 +5,12 @@ export default class Search extends Component {
     render() {
         return (
             <Styles>
-                <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                        aria-describedby="search-addon" />
-                    <button type="button" class="btn btn-outline-primary">search</button>
+                <div className="col-md-5 col-lg-12">
+                    <div className="input-group">
+                        <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search"
+                            aria-describedby="search-addon" />
+                        <button type="button" className="btn btn-outline-primary">search</button>
+                    </div>
                 </div>
             </Styles>
 
@@ -17,9 +19,5 @@ export default class Search extends Component {
 }
 
 const Styles = styled.div`
-    margin-left: 10%;
-
-    .btn{
-        margin-left:1rem;
-    }
+    
 `;

@@ -1,13 +1,16 @@
 package com.example.peak.controlers;
 
+import com.example.peak.models.ShowDTO;
 import com.example.peak.models.User;
 import com.example.peak.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.*;
 
-@Component
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class Start {
 
     private final UserRepository userRepository;
@@ -15,9 +18,22 @@ public class Start {
     public Start(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    @EventListener(ApplicationReadyEvent.class)
-    public void runExample() {
-        User user = new User("Grzegorz","Szydlo", 10);
-        userRepository.save(user);
+
+    @GetMapping("/users")
+    public Iterable<User> runExample() {
+//        User user = new User("Grzegorz","Szydlo", 10);
+//        userRepository.save(user);
+        return userRepository.findAll();
     }
+
+    @PostMapping(value = "/names")
+    public void show(@RequestBody ShowDTO allParams){
+        System.out.println("Otrzymałem " + allParams);
+    }
+
+    @PostMapping(value = "/names/{id}")
+    public void show2(@PathVariable int id){
+        System.out.println("Otrzymałem" + id);
+    }
+
 }
