@@ -5,6 +5,7 @@ import com.example.peak.models.Mountain;
 import com.example.peak.repository.MountainRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,5 +21,12 @@ public class MountainController {
     @GetMapping(value = "/mountains")
     public Iterable<Mountain> getMountains() {
         return mountainRepository.findAll();
+    }
+
+    @GetMapping(value = "/mountains/add")
+    public void addMountains() {
+
+        Mountain mountain = new Mountain("Rysy","Wysokie", 1000.1, "Tatry", "Rysy.jpg");
+        mountainRepository.save(mountain);
     }
 }

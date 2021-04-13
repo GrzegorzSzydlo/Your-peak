@@ -1,51 +1,49 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import Rysy from '../img/Rysy.jpg';
 import MountainViews from "../views/MountainViews";
-import {Link} from "react-router-dom";
 
 
-
-function MountainDescription(){
+function MountainDescription({mountain}){
     const [status, setStatus] = useState(false)
     const handleClick = e=> {
         e.preventDefault();
         setStatus(true);
     }
 
-    const changeStatus = e=> {
+    function changeStatus(){
         setStatus(false);
     }
 
+
     return (
-        <Styles>
+        <Styles className= {status ? "col-lg-offset-10 mx-auto" : "col-4 mx-auto"}>
+
             {(status===false) ? (
-            <div className="card">
-                <img src={Rysy} className="card-img-top" alt="..." />
-                <div className="card-body">
-                    <h4 className="card-title">Card title</h4>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's content.</p>
-                    <button className="btn btn-primary"  onClick={handleClick}>
-                            Read more
+                    <div className="card">
+                        <img src={mountain.image} className="card-img-top" alt={mountain.name} />
+                        <div className="card-body">
+                            <h4 className="card-title">{mountain.name}</h4>
+                            <p className="card-text">{mountain.description}</p>
+                            <button className="btn btn-primary"  onClick={handleClick}>
+                                    Read more
+                            </button>
+                        </div>
 
-                    </button>
-                </div>
+                    </div>
 
-            </div>
             ):(
-                <MountainViews changeStatus={changeStatus}/>
+                <MountainViews changeStatus={changeStatus} mountain={mountain}/>
             )}
+
         </Styles>
         );
 }
 
 const Styles = styled.div`
+  
+    //width: {$props => props.status === true ? "20rem": "80%"};
     padding: 1rem;
-    .card{
-      width: 18rem;
-    }
-  img{
+  .card-img-top{
       width: 18rem;
       height: 12rem;
   }

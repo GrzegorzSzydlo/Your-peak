@@ -16,22 +16,23 @@ public class Mountain {
     private String name;
     @NotEmpty
     private String description;
-    @NotEmpty
-    private Long height;
+
+    private Double height;
 
     private String range;
     private String image;
 
-    public Mountain(@NotEmpty String name, @NotEmpty String description, @NotEmpty Long height, String range, String image) {
+    public Mountain(@NotEmpty String name, @NotEmpty String description, Double height, String range, String image) {
         this.name = name;
         this.description = description;
         this.height = height;
         this.range = range;
-        this.image = image;
+        this.image = "img/" + image;
     }
 
     public Mountain() {
     }
+
 
     public Long getId() {
         return id;
@@ -57,11 +58,11 @@ public class Mountain {
         this.description = description;
     }
 
-    public Long getHeight() {
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(Long height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 

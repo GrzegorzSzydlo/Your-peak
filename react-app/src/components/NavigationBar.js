@@ -43,16 +43,16 @@ export const NavigationBar = () => (
                             <Link to="/">Home</Link>
                         </a>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link">
-                            <Link to="/about">About</Link>
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link">
-                            <Link to="/contact">Contact</Link>
-                        </a>
-                    </li>
+                    {/*<li className="nav-item">*/}
+                    {/*    <a className="nav-link">*/}
+                    {/*        <Link to="/about">About</Link>*/}
+                    {/*    </a>*/}
+                    {/*</li>*/}
+                    {/*<li className="nav-item">*/}
+                    {/*    <a className="nav-link">*/}
+                    {/*        <Link to="/contact">Contact</Link>*/}
+                    {/*    </a>*/}
+                    {/*</li>*/}
                     <li className="nav-item">
                         <a className="nav-link">
                             <Link to="/loginSuccess">Sign In</Link>

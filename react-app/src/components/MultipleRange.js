@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const Styles = styled.div`
   .form-control {
-    width: 4.5rem;
+    width: 5rem;
   }
   
 
