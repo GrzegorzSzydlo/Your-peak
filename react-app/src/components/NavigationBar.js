@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Search from './Search';
 import logo from "../logo.svg";
 
 const Styles = styled.div`
@@ -36,7 +35,7 @@ export const NavigationBar = () => (
             
             <div className="navbar-toggle" aria-controls="basic-navbar-nav" />
             <div className="navbar-collapse" id="basic-navbar-nav">
-                <Search />
+
                 <ul className="nav ml-auto">
                     <li className="nav-item">
                         <a className="nav-link">

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 const Styles = styled.div`
   .form-control {
     width: 5rem;
+    text-align: center;
   }
   
 

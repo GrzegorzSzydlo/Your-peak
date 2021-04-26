@@ -1,8 +1,11 @@
 package com.example.peak.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="`mountain`")
@@ -14,25 +17,33 @@ public class Mountain {
 
     @NotEmpty
     private String name;
+
     @NotEmpty
+    @Lob
+    @Column(name="description", length=1500)
     private String description;
 
     private Double height;
 
     private String range;
-    private String image;
 
-    public Mountain(@NotEmpty String name, @NotEmpty String description, Double height, String range, String image) {
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "file_id", referencedColumnName = "id")
+    private File file;
+
+
+    public Mountain(@NotEmpty String name, @NotEmpty String description, Double height, String range, @NotNull File file) {
         this.name = name;
         this.description = description;
         this.height = height;
         this.range = range;
-        this.image = "img/" + image;
+        this.file = file;
     }
 
     public Mountain() {
-    }
 
+    }
 
     public Long getId() {
         return id;
@@ -74,11 +85,23 @@ public class Mountain {
         this.range = range;
     }
 
-    public String getImage() {
-        return image;
+    public File getFile() {
+        return file;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    @Override
+    public String toString() {
+        return "Mountain{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", height=" + height +
+                ", range='" + range + '\'' +
+                ", file=" + file +
+                '}';
     }
 }

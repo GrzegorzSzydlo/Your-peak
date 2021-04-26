@@ -1,38 +1,46 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import MountainDescription from "./MountainDescription";
-import axios from "axios";
+
+import MountainViews from "../views/MountainViews";
 
 
+function MountainList({mountainAll}) {
 
-function MountainList() {
+    const [details, setDetails] = useState([]);
+    const [status, setStatus] = useState(false);
 
-    const [mountains, setMountains] = useState([]);
-    const api = axios.create({
-        baseURL: `http://localhost:8080`})
 
-    useEffect(() =>{
-        api.get('/mountains').then(response => response.data)
-            .then(data => setMountains(data))
-        console.log(mountains);
-    },[])
+    function changeStatusOnFalse() {
+        setStatus(false);
+    }
+
+    function changeStatusOnTrue() {
+        setStatus(true);
+    }
+
 
     return (
-        <div className="container">
+        <Styles>
 
-            <div className="row">
-                {
-                    mountains.map(mountain => (
-
-                        <MountainDescription mountain={mountain}/>
-
-                    ))
-                }
-
+            <div className="container">
+                {(status === false) ? (
+                    <div className="row">
+                        {
+                            mountainAll.map(mountain => (
+                                <MountainDescription mountain={mountain} changeStatusOnTrue={changeStatusOnTrue}
+                                                     setDetails={setDetails}/>
+                            ))
+                        }
+                    </div>
+                ) : (
+                    <MountainViews changeStatusOnFalse={changeStatusOnFalse} details={details}/>
+                )}
             </div>
-        </div>
+        </Styles>
     )
 }
+
 const Styles = styled.div`
 
 `;
