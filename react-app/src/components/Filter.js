@@ -1,13 +1,16 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Title1, Title2} from './DiffrentTitle';
 import RangesName from './RangesName';
 import styled from 'styled-components';
 import MultipleRange from "./MultipleRange";
 import Search from "./Search";
 
-export default function Filter({mountainAll ,changeMountainsList, setSearchText, searchTag, setSearchTag}) {
+export default function Filter({setSearchText, searchTag, setSearchTag}) {
 
 
+    useEffect(() => {
+        ``
+    })
 
 
 

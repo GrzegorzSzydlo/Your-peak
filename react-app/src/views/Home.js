@@ -22,13 +22,6 @@ export default function Home() {
         console.log(mountains)
     }
 
-    const changeMountainsList = (mountainsFiltr) => {
-        console.log(mountains)
-        console.log(mountains2)
-        console.log(mountainsFiltr)
-        setMountains(mountainsFiltr);
-        setMountains2(mountains);
-    }
 
     const [searchText, setSearchText] = useState("");
     const [searchTag, setSearchTag] = useState([]);
@@ -65,7 +58,7 @@ export default function Home() {
     return (
         <div className="row">
             <div className="col-3">
-                <Filter mountainAll={mountains2} changeMountainsList={changeMountainsList} setSearchText={setSearchText} searchTag={searchTag} setSearchTag={setSearchTag}/>
+                <Filter setSearchText={setSearchText} searchTag={searchTag} setSearchTag={setSearchTag}/>
             </div>
             <div className="col-9">
                 {status ? (
