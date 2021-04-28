@@ -9,11 +9,11 @@ const Styles = styled.div`
     text-align: center;
   }
   
-
-
 `;
 
-class MultipleRange extends Component {
+export default class MultipleRange extends Component {
+
+
 
     value = [0,1000];
     handleChange = (event, newValue) => {
@@ -44,6 +44,4 @@ class MultipleRange extends Component {
             </Styles>
         );
     }
-}
-
-export default MultipleRange;
+};

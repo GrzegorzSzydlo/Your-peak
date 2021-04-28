@@ -14,9 +14,8 @@ export default function  Search({ setSearchText }) {
                                placeholder="Search"
                                aria-label="Search"
                                aria-describedby="search-addon"
-                               onChange={(e) => {setSearchText(e.target.value);console.log(e.target.value)}}
+                               onChange={(e) => setSearchText(e.target.value)}
                         />
-                        {/*<button type="button" className="btn btn-outline-primary">search</button>*/}
                     </div>
                 </div>
             </Styles>

@@ -36,6 +36,12 @@ export default function AddCardMountain() {
 
         if (resp.data != null) {
             sendData();
+            setMountain({
+                name: '',
+                description: '',
+                height: '',
+                range: ''})
+            setFile({file: ''});
         }
 
 

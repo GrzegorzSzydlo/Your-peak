@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styled from "styled-components";
 
 
@@ -10,17 +10,6 @@ function MountainDescription({mountain, changeStatusOnTrue, setDetails}){
         setDetails(mountain);
         changeStatusOnTrue();
     }
-
-
-    // useEffect(() => {
-    //     fetch('http://localhost:8080/mountain/file/' + mountain.id )
-    //         .then(response => {
-    //             response.blob().then(blob => {
-    //                 mountain.image = window.URL.createObjectURL(blob);
-    //             })
-    //         })
-    // }, [])
-
 
     return (
 

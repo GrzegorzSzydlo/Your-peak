@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000" ,exposedHeaders = {"Content-Disposition"})
@@ -33,6 +34,11 @@ public class MountainController {
     @GetMapping(value = "/mountains")
     public Iterable<Mountain> getMountains() {
         return mountainRepository.findAll();
+    }
+
+    @GetMapping(value = "/mountainRange")
+    public List<String> getMountainsByRange() {
+        return mountainRepository.getAllRanges();
     }
 
 

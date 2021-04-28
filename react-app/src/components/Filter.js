@@ -5,12 +5,23 @@ import styled from 'styled-components';
 import MultipleRange from "./MultipleRange";
 import Search from "./Search";
 
+
+import axios from "axios";
+
+const api = axios.create({
+    baseURL: `http://localhost:8080`
+})
+
+
 export default function Filter({setSearchText, searchTag, setSearchTag}) {
 
 
+    const [ranges, setRanges] = useState([])
     useEffect(() => {
-        ``
-    })
+        api.get("/mountainRange").then(response => response.data).then(data => {
+            setRanges(data);
+        })
+    }, [])
 
 
 
@@ -21,6 +32,29 @@ export default function Filter({setSearchText, searchTag, setSearchTag}) {
                     <Title1 title="Filters"/>
                     <Search setSearchText={setSearchText}/>
                     <Title2 title="Mountain ranges"/>
+
+                    //pasma z bazy danych
+                    {ranges.map((range) =>
+                    <div className="form-check" key={range}>
+                        <input className="form-check-input"
+                               type="checkbox"
+                               value=""
+                               id="flexCheckChecked"
+                               checked={searchTag.includes(range)}
+                               onChange={(e)=>{
+                                   const checked = searchTag.includes(range);
+                                   setSearchTag((prev) => checked ?
+                                       prev.filter((sc) => sc !== range)
+                                       : [...prev, range]);
+                               }}
+                        />
+                        <label className="form-check-label" htmlFor="flexCheckChecked">
+                            {range}
+                        </label>
+                    </div>
+                    )}
+                    //
+
                     <div className="form-check">
                         <input className="form-check-input"
                                type="checkbox"
@@ -38,6 +72,7 @@ export default function Filter({setSearchText, searchTag, setSearchTag}) {
                             Tatry
                         </label>
                     </div>
+
                     <div className="form-check">
                         <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
                         <label className="form-check-label" htmlFor="flexCheckChecked">

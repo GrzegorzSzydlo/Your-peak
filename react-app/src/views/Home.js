@@ -19,21 +19,18 @@ export default function Home() {
     const changeStatus = () => {
         setMountains2(mountains)
         setStatus(true);
-        console.log(mountains)
     }
 
 
     const [searchText, setSearchText] = useState("");
     const [searchTag, setSearchTag] = useState([]);
 
-    console.log(searchTag);
 
     function search(mounts) {
         const mountainKeys = mounts[0] && Object.keys(mounts[0])
         let filtr1 =  mounts.filter((mountain) =>
             mountainKeys.some((key) => mountain[key].toString().toLowerCase().indexOf(searchText.toLowerCase()) > -1));
         let filtr2 = filtr1.filter((mountain) =>mountain["range"].toString().toLowerCase().indexOf(searchTag.toString().toLowerCase()) > -1);
-        console.log(filtr2)
         return filtr2;
     }
 
@@ -52,7 +49,7 @@ export default function Home() {
                 changeStatus()
             })
 
-    }, [status, mountains.length]);
+    }, [status]);
 
 
     return (

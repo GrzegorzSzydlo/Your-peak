@@ -53,7 +53,8 @@ function MountainViews({changeStatusOnFalse, details}) {
 const Styles = styled.div`
 
   .img-fluid {
-    //height: 30rem;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 `;

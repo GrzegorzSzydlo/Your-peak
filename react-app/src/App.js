@@ -8,7 +8,6 @@ import Contact  from './views/Contact';
 import NoMatch from './views/NoMatch';
 import { NavigationBar } from './components/NavigationBar';
 import LoginSuccess from "./views/LoginSuccess";
-import File from "./views/File";
 import CreateAccountSuccess from "./views/CreateAccountSuccess";
 
 import AddCardMountain from "./views/AddCardMountain";
@@ -26,7 +25,6 @@ class App extends Component {
               <Route path="/contact" component={Contact} />
               <Route path="/registration" component={CreateAccountSuccess} />
               <Route path="/loginSuccess" component={LoginSuccess} />
-              <Route path="/file" component={File} />
               <Route path="/addCardMountain" component={AddCardMountain} />
 
               <Route component={NoMatch} />
