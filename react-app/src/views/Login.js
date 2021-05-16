@@ -1,29 +1,26 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import axios from 'axios'
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux"
+import {signin} from "../authorization/ActionAuth";
 
-
-
-const api = axios.create({
-    baseURL: `http://localhost:8080`
-})
-
-
-
-function Login({LoggedSuccessfully, error}) {
-
+function Login( ) {
+    const dispatch = useDispatch();
+    const auth = useSelector(state => state.auth);
+    const history = useHistory();
+    const [error, setError] = useState("");
     const [data, setData] = useState({email: "", password: ""});
-    const res = async () => {
-        const resp = await api.post("http://localhost:8080/login", data);
-        LoggedSuccessfully(resp.data);
-    }
+
 
     const submitFunction = e => {
         e.preventDefault();
-
-        res();
-
+        dispatch(signin(data)).then(()=>{
+           console.log("Login success");
+        });
+        if(!auth.register_error)
+        {
+            setError("Wrong email or password")
+        }
     }
 
         return (
@@ -37,7 +34,6 @@ function Login({LoggedSuccessfully, error}) {
                                 </div>
                                 <div className="panel-body">
                                     <form role="form" onSubmit={submitFunction} className="form d-flex row  align-content-center justify-content-center">
-                                        {(error !== "") ? (<p className='error'>{error}</p>) : ""}
 
                                         <div className="form-group pt-3">
                                             <input
@@ -68,7 +64,11 @@ function Login({LoggedSuccessfully, error}) {
                                                 </div>
                                             </div>
                                         </div>
+                                        <div className="d-flex justify-content-center">
+                                            <p>{error}</p>
+                                        </div>
                                     <div className="row-cols-5 d-flex justify-content-center">
+
                                         <button type="submit" className="buttonLogin ">
                                             Login
                                         </button>

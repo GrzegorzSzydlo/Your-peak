@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Title1, Title2} from './DiffrentTitle';
-import RangesName from './RangesName';
 import styled from 'styled-components';
 import MultipleRange from "./MultipleRange";
 import Search from "./Search";
@@ -9,11 +8,11 @@ import Search from "./Search";
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: `http://localhost:8080`
+    baseURL: `http://localhost:8080/api`
 })
 
 
-export default function Filter({setSearchText, searchTag, setSearchTag}) {
+export default function Filter({setSearchText, searchTag, setSearchTag, setSearchHeight}) {
 
 
     const [ranges, setRanges] = useState([])
@@ -93,7 +92,7 @@ export default function Filter({setSearchText, searchTag, setSearchTag}) {
                     </div>
 
                     <Title2 title="Height"/>
-                    <MultipleRange />
+                    <MultipleRange setSearchHeight={setSearchHeight} />
                 </div>
             </Styles>
         )

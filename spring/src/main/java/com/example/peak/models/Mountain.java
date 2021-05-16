@@ -28,17 +28,16 @@ public class Mountain {
     private String range;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "file_id", referencedColumnName = "id")
-    private File file;
+    @Lob
+    private String image;
 
 
-    public Mountain(@NotEmpty String name, @NotEmpty String description, Double height, String range, @NotNull File file) {
+    public Mountain(@NotEmpty String name, @NotEmpty String description, Double height, String range, @NotNull String image) {
         this.name = name;
         this.description = description;
         this.height = height;
         this.range = range;
-        this.file = file;
+        this.image = image;
     }
 
     public Mountain() {
@@ -85,12 +84,12 @@ public class Mountain {
         this.range = range;
     }
 
-    public File getFile() {
-        return file;
+    public String getImage() {
+        return image;
     }
 
-    public void setFile(File file) {
-        this.file = file;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override
@@ -101,7 +100,7 @@ public class Mountain {
                 ", description='" + description + '\'' +
                 ", height=" + height +
                 ", range='" + range + '\'' +
-                ", file=" + file +
+                ", image=" + image +
                 '}';
     }
 }

@@ -6,7 +6,7 @@ import  Home  from './views/Home';
 import { About } from './views/About';
 import Contact  from './views/Contact';
 import NoMatch from './views/NoMatch';
-import { NavigationBar } from './components/NavigationBar';
+import  NavigationBar from './components/NavigationBar';
 import LoginSuccess from "./views/LoginSuccess";
 import CreateAccountSuccess from "./views/CreateAccountSuccess";
 
