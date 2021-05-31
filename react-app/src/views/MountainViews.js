@@ -13,7 +13,7 @@ function MountainViews({changeStatusOnFalse, details}) {
     return (
         <Styles key={id} className=" text-center pt-2">
 
-            <div className="col-10 ">
+            <div className="col-11 ">
                 <div className="row justify-content-end my-2">
                     <button className="col-2 btn-primary " onClick={handleClick}>
                         back
@@ -21,7 +21,7 @@ function MountainViews({changeStatusOnFalse, details}) {
                 </div>
                 <div className="row ">
                     <div className="col-6">
-                        <img src={image} alt="..." className=" img-fluid "/>
+                        <img src={image} alt="..." className=" img-fluid rounded"/>
                     </div>
                     <div className="col-6">
                         <div className="row">
@@ -30,8 +30,8 @@ function MountainViews({changeStatusOnFalse, details}) {
 
 
                         <div className="row my-2" >
-                            <h4 className="col-4">Wysokość : </h4>
-                            <p className="col-4">{height}</p>
+                            <h4 className="col-6">Wysokość : </h4>
+                            <p className="col-6">{height}</p>
                         </div>
                         <div className="row">
                             <div>
@@ -52,11 +52,13 @@ function MountainViews({changeStatusOnFalse, details}) {
 
 const Styles = styled.div`
 
+  font-family: 'Lobster', cursive;
   .img-fluid {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+  
 `;
 
 export default MountainViews;

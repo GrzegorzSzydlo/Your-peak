@@ -17,7 +17,7 @@ const CreateAccountSuccess = () => {
                 <Registration submitForm={submitForm} />
             ) : (
                 <div className='create-account'>
-                    <Link to='/login'>
+                    <Link to='/loginSuccess'>
                         <button>Your account was created succesfully</button>
                     </Link>
                 </div>

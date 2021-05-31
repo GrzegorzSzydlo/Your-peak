@@ -7,7 +7,7 @@ export default function  Search({ setSearchText }) {
 
         return (
             <Styles>
-                <div className="col-md-5 col-lg-12">
+                <div className="col-12">
                     <div className="input-group">
                         <input type="search"
                                className="form-control rounded"

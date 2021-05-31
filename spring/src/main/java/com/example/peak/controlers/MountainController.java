@@ -2,82 +2,64 @@ package com.example.peak.controlers;
 
 
 import com.example.peak.models.Mountain;
-import com.example.peak.models.File;
-import com.example.peak.repository.FileRepository;
 import com.example.peak.repository.MountainRepository;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import javax.validation.constraints.NotNull;
-import java.io.IOException;
-import java.net.URI;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000" ,exposedHeaders = {"Content-Disposition"})
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping(value = "/api")
 public class MountainController {
 
-    private final FileRepository fileRepository;
     private final MountainRepository mountainRepository;
-    private File file;
 
-    public MountainController(FileRepository fileRepository, MountainRepository mountainRepository) {
-        this.fileRepository = fileRepository;
+    @Autowired
+    public MountainController(MountainRepository mountainRepository) {
         this.mountainRepository = mountainRepository;
     }
 
-    @GetMapping(value = "/mountains")
+    @GetMapping(value = "/mountain/mountains")
     public Iterable<Mountain> getMountains() {
         return mountainRepository.findAll();
     }
 
-    @GetMapping(value = "/mountainRange")
+    @GetMapping(value = "/mountain/mountainRange")
     public List<String> getMountainsByRange() {
         return mountainRepository.getAllRanges();
     }
 
+    @GetMapping(value = "/mountain/mountainHeight")
+    public Double getMaxHeight() {
+        return mountainRepository.getMaxHeight();
+    }
 
-    @PostMapping(value = "/mountain/addNewMountain")
-    public void addNewMountains(@RequestBody Mountain mountain) {
 
+    @PostMapping(value = "/addNewMountain")
+    public void addNewMountains(@RequestBody JsonNode mountain) {
 
         Mountain newMountain = new Mountain();
-        newMountain.setName(mountain.getName());
-        newMountain.setDescription(mountain.getDescription());
-        newMountain.setHeight(mountain.getHeight());
-        newMountain.setRange(mountain.getRange());
-        newMountain.setFile(file);
+        newMountain.setName(mountain.get("name").asText());
+        newMountain.setDescription(mountain.get("description").asText());
+        newMountain.setHeight(mountain.get("height").asDouble());
+        newMountain.setRange(mountain.get("range").asText());
+        newMountain.setImage(mountain.get("image").asText());
 
 
         mountainRepository.save(newMountain);
     }
 
-    @PostMapping(value = "/mountain/addFile")
-    public ResponseEntity<Void> addFile(@NotNull @RequestParam("file") MultipartFile multipartFile) throws IOException {
-        file = new File(multipartFile.getOriginalFilename(), multipartFile.getContentType(), multipartFile.getBytes());
+    @GetMapping(value = "/mountain/image/{id}")
+    public String getFile(@PathVariable("id") Long id){
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
-        return ResponseEntity.created(location).build();
+        Mountain mountain = mountainRepository.findById(id).orElse(null);
+        assert mountain != null;
+        return mountain.getImage();
+
     }
 
-    @GetMapping(value = "/mountain/file/{id}")
-    public ResponseEntity<byte[]> getFile(@PathVariable("id") Long id){
 
-        File fileMountain  = fileRepository.findById(id).get();
-
-        HttpHeaders header = new HttpHeaders();
-
-        header.setContentType(MediaType.valueOf(fileMountain.getContentType()));
-        header.setContentLength(fileMountain.getData().length);
-        header.set("Content-Disposition", "attachment; filename=" + fileMountain.getFileName());
-
-        return new ResponseEntity<>(fileMountain.getData(), header, HttpStatus.OK);
-    }
 
 
 }

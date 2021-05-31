@@ -12,8 +12,7 @@ function MountainDescription({mountain, changeStatusOnTrue, setDetails}){
     }
 
     return (
-
-        <Styles key={mountain.id} className="col-lg-3">
+        <Styles key={mountain.id} className="col-sm-12 col-md-6 col-lg-4">
                     <div className="card" >
                         <img id={mountain.id} src={mountain.image} className="card-img-top " alt={mountain.name}  />
                         <div className="card-body">

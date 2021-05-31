@@ -21,6 +21,10 @@ public class User implements Serializable {
     @NotEmpty
     private String password;
 
+    private String role;
+
+
+
     @NotEmpty
     private String salt;
 
@@ -73,6 +77,14 @@ public class User implements Serializable {
 
     public void setSalt(String salt) {
         this.salt = salt;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override

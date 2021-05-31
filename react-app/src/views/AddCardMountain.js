@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 const api = axios.create({
-    baseURL: `http://localhost:8080`
+    baseURL: `http://localhost:8080/api`
 })
 
 export default function AddCardMountain() {
@@ -13,50 +13,55 @@ export default function AddCardMountain() {
         name: '',
         description: '',
         height: '',
-        range: ''
+        range: '',
+        image: ''
     });
-
-    const [file, setFile] = useState('');
 
     const sendData = () => {
 
-        api.post(`http://localhost:8080/mountain/addNewMountain`, mountain)
+        const config = {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem('token')
+            }
+        };
+        api.post(`/addNewMountain`, mountain, config)
             .then(r => {
                 console.log("Wysłane mountain");
+                setMountain({
+                    name: '',
+                    description: '',
+                    height: '',
+                    range: '',
+                    image: ''})
+                file = "";
+
             });
     }
 
-    const sendFile = async () => {
-
-        let data = new FormData();
-        data.append('file', file);
-        data.append('name', file.name);
-
-        const resp = await api.post(`http://localhost:8080/mountain/addFile`, data);
-
-        if (resp.data != null) {
-            sendData();
-            setMountain({
-                name: '',
-                description: '',
-                height: '',
-                range: ''})
-            setFile({file: ''});
-        }
-
-
-    }
 
     const submitFunction = e => {
         e.preventDefault();
-        sendFile();
-        //sendData();
+        sendData();
 
     }
+    let file ="";
+    const onFileChange = async (event) => {
+        //setFile(event.target.files[0]);
+        file = event.target.files[0];
 
-    const onFileChange = (event) => {
-        setFile(event.target.files[0]);
-    }
+
+        const resp = (file) =>new Promise((resolve, reject) =>{
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        })
+
+
+        const dataURL = await resp(file);
+        setMountain({...mountain, image: dataURL})
+        }
+
 
     return (
 
@@ -67,6 +72,7 @@ export default function AddCardMountain() {
                     <input className="form-control input-sm"
                            type="text"
                            name="name"
+                           value={mountain.name}
                            placeholder="name"
                            onChange={e => setMountain({...mountain, name: e.target.value})}
                            required/>
@@ -76,6 +82,7 @@ export default function AddCardMountain() {
                 <textarea
                     className="form-control input-sm"
                     name="description"
+                    value={mountain.description}
                     placeholder="description"
                     onChange={e => setMountain({...mountain, description: e.target.value})}
                     required/>
@@ -86,6 +93,7 @@ export default function AddCardMountain() {
                     <input className="form-control input-sm"
                            type="number"
                            name="height"
+                           value={mountain.height}
                            placeholder="height"
                            onChange={e => setMountain({...mountain, height: e.target.value})}
                            required/>
@@ -95,13 +103,14 @@ export default function AddCardMountain() {
                     <input className="form-control input-sm"
                            type="text"
                            name="range"
+                           value={mountain.range}
                            placeholder="range"
                            onChange={e => setMountain({...mountain, range: e.target.value})}
                            required/>
                 </div>
                 <div className="col-7 py-1">
                     <input className="form-control input-sm col-7"
-                           onChange={e => setFile(e.target.files[0])}
+                           onChange={onFileChange}
                            type="file"/>
                 </div>
 
@@ -112,6 +121,8 @@ export default function AddCardMountain() {
                 </div>
 
             </form>
+
+            <img id="output" alt="photo"/>
 
         </Styles>
     );
