@@ -33,7 +33,7 @@ export default function Home() {
 
 
     useEffect(() => {
-        api.get('/mountains').then(response => {
+        api.get('/mountain/mountains').then(response => {
             Promise.all(response.data.map(num =>
             api.get('/mountain/image/' + num.id)
                 .then(response => response.data)

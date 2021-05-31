@@ -40,12 +40,12 @@ public class UserController {
         String hashedPassword = BCrypt.hashpw(user.getPassword(), salt);
         user.setPassword(hashedPassword);
         user.setSalt(salt);
+        user.setRole("USER");
         userRepository.save(user);
     }
 
     @PostMapping(value = "/login")
     public ResponseEntity<?> loggedUser(@RequestBody User details){
-        System.out.println(details.getEmail() + " " + details.getPassword());
 
         String salt = userRepository.getSaltByEmail(details.getEmail());
 

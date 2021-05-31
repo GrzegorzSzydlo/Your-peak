@@ -1,6 +1,7 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import Slider from '@material-ui/core/Slider';
 import styled from 'styled-components';
+import axios from "axios";
 
 
 const Styles = styled.div`
@@ -11,9 +12,23 @@ const Styles = styled.div`
   
 `;
 
+const api = axios.create({
+    baseURL: `http://localhost:8080/api`
+})
+
 export default function MultipleRange({setSearchHeight}) {
 
+
     const [value, setValue] = useState([0,1000])
+    const [max, setMax] = useState()
+
+
+    useEffect(() => {
+        api.get("/mountain/mountainHeight").then(response => response.data).then(data => {
+            value[1] = Math.pow(10, data.toString().length);
+            setMax(Math.pow(10, data.toString().length))
+        })
+    }, [])
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -36,7 +51,7 @@ export default function MultipleRange({setSearchHeight}) {
 
                 <Slider
                     value={value}
-                    max = {1000}
+                     max = {max}
                     onChange={handleChange}
                     valueLabelDisplay="auto"
                     aria-labelledby="range-slider"

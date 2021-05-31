@@ -20,21 +20,24 @@ public class MountainController {
         this.mountainRepository = mountainRepository;
     }
 
-    @GetMapping(value = "/mountains")
+    @GetMapping(value = "/mountain/mountains")
     public Iterable<Mountain> getMountains() {
         return mountainRepository.findAll();
     }
 
-    @GetMapping(value = "/mountainRange")
+    @GetMapping(value = "/mountain/mountainRange")
     public List<String> getMountainsByRange() {
         return mountainRepository.getAllRanges();
     }
 
+    @GetMapping(value = "/mountain/mountainHeight")
+    public Double getMaxHeight() {
+        return mountainRepository.getMaxHeight();
+    }
 
-    @PostMapping(value = "/mountain/addNewMountain")
+
+    @PostMapping(value = "/addNewMountain")
     public void addNewMountains(@RequestBody JsonNode mountain) {
-
-
 
         Mountain newMountain = new Mountain();
         newMountain.setName(mountain.get("name").asText());

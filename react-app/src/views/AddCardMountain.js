@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 const api = axios.create({
-    baseURL: `http://localhost:8080`
+    baseURL: `http://localhost:8080/api`
 })
 
 export default function AddCardMountain() {
@@ -19,7 +19,12 @@ export default function AddCardMountain() {
 
     const sendData = () => {
 
-        api.post(`/mountain/addNewMountain`, mountain)
+        const config = {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem('token')
+            }
+        };
+        api.post(`/addNewMountain`, mountain, config)
             .then(r => {
                 console.log("Wysłane mountain");
                 setMountain({

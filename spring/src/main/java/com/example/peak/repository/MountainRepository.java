@@ -13,4 +13,8 @@ public interface MountainRepository extends CrudRepository<Mountain, Long> {
 
     @Query(nativeQuery = true, value = "SELECT  m.range FROM mountain AS m GROUP BY m.range ")
     List<String> getAllRanges();
+
+    @Query(nativeQuery = true, value = "SELECT  MAX(height) FROM mountain")
+    Double getMaxHeight();
+
 }

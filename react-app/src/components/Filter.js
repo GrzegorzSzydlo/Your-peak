@@ -16,8 +16,9 @@ export default function Filter({setSearchText, searchTag, setSearchTag, setSearc
 
 
     const [ranges, setRanges] = useState([])
+
     useEffect(() => {
-        api.get("/mountainRange").then(response => response.data).then(data => {
+        api.get("/mountain/mountainRange").then(response => response.data).then(data => {
             setRanges(data);
         })
     }, [])
@@ -32,7 +33,6 @@ export default function Filter({setSearchText, searchTag, setSearchTag, setSearc
                     <Search setSearchText={setSearchText}/>
                     <Title2 title="Mountain ranges"/>
 
-                    //pasma z bazy danych
                     {ranges.map((range) =>
                     <div className="form-check" key={range}>
                         <input className="form-check-input"
@@ -52,44 +52,6 @@ export default function Filter({setSearchText, searchTag, setSearchTag, setSearc
                         </label>
                     </div>
                     )}
-                    //
-
-                    <div className="form-check">
-                        <input className="form-check-input"
-                               type="checkbox"
-                               value=""
-                               id="flexCheckChecked"
-                               checked={searchTag.includes("Tatry")}
-                               onChange={(e)=>{
-                                   const checked = searchTag.includes("Tatry");
-                                   setSearchTag((prev) => checked ?
-                                   prev.filter((sc) => sc !== "Tatry")
-                                   : [...prev, "Tatry"]);
-                               }}
-                        />
-                        <label className="form-check-label" htmlFor="flexCheckChecked">
-                            Tatry
-                        </label>
-                    </div>
-
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-                        <label className="form-check-label" htmlFor="flexCheckChecked">
-                            Bieszczady
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-                        <label className="form-check-label" htmlFor="flexCheckChecked">
-                            Gorce
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-                        <label className="form-check-label" htmlFor="flexCheckChecked">
-                            Karpaty
-                        </label>
-                    </div>
 
                     <Title2 title="Height"/>
                     <MultipleRange setSearchHeight={setSearchHeight} />

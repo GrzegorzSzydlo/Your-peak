@@ -20,10 +20,10 @@ public class JsonWebTokenProvider {
 
         return Jwts.builder()
                 .setSubject(user.getEmail())
-                .claim("role", "ROLE_ADMIN")
+                .claim("role", user.getRole())
                 .claim("name", name)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+60000))
+                .setExpiration(new Date(System.currentTimeMillis()+36000000))
                 .signWith(SignatureAlgorithm.HS512, signingKey)
                 .compact();
     }
