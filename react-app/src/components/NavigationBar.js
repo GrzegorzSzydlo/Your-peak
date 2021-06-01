@@ -46,20 +46,26 @@ export default function NavigationBar() {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const [statusLogaut,setStatusLogaut] = useState(false)
+
 
     function handleLogout() {
         dispatch(signout()).then(() => {
-            history.push("/");
+            history.replace("/addCardMountain");
         });
+        setStatusLogaut(true);
+        setDecode({role: "NULL", name: "NULL"})
     }
+
+
 
     const [decode, setDecode] = useState({role: "NULL", name: "NULL"});
     useEffect(() => {
         if (auth.login) {
-            const token = auth.auth.second;
+            const token = localStorage.getItem('token');
             setDecode(jwt_decode(token));
         }
-    }, [auth.login]);
+    }, [auth.login,statusLogaut]);
 
 
     return (

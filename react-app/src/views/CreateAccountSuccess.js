@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Registration from "./Registration";
+import styled from "styled-components";
 
+const Styles = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+`;
 
 const CreateAccountSuccess = () => {
 
@@ -16,11 +22,11 @@ const CreateAccountSuccess = () => {
             {!isSubmitted ? (
                 <Registration submitForm={submitForm} />
             ) : (
-                <div className='create-account'>
+                <Styles>
                     <Link to='/loginSuccess'>
-                        <button>Your account was created succesfully</button>
+                        <button className='btn btn-secondary'>Your account was created succesfully</button>
                     </Link>
-                </div>
+                </Styles>
             )}
 
         </>

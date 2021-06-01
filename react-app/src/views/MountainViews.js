@@ -28,6 +28,10 @@ function MountainViews({changeStatusOnFalse, details}) {
                             <h2>{name}</h2>
                         </div>
 
+                        <div className="row my-2" >
+                            <h4 className="col-6">Pasmo górskie : </h4>
+                            <p className="col-6">{range}</p>
+                        </div>
 
                         <div className="row my-2" >
                             <h4 className="col-6">Wysokość : </h4>

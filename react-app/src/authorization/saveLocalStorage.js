@@ -14,7 +14,7 @@ const auth = (state = initialState, action) => {
         case "SIGNIN":
             localStorage.setItem("id", JSON.stringify(action.payload.first));
             localStorage.setItem("token", action.payload.second);
-
+            localStorage.setItem("user", JSON.stringify(action.payload));
             return {
                 ...state, auth: action.payload, login: true, login_error: false
             }
@@ -24,6 +24,7 @@ const auth = (state = initialState, action) => {
             }
 
         case 'SIGNOUT': {
+            localStorage.removeItem("user");
             localStorage.removeItem("id");
             localStorage.removeItem("token");
             state.login = false;
