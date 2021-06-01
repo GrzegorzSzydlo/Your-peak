@@ -100,7 +100,10 @@ export default Login;
 
 const LoginWrapper = styled.div`
 
+  width: 60%;
+  
   .buttonLogin, .buttonRegistration {
+    width: auto;
     text-transform: capitalize;
     font-size: medium;
     background: rgba(192, 202, 245,0.6);

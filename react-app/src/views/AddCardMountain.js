@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 
 const api = axios.create({
@@ -8,6 +10,13 @@ const api = axios.create({
 })
 
 export default function AddCardMountain() {
+    const auth = useSelector(state => state.auth);
+    const history = useHistory();
+
+    if (!auth.login)
+        history.replace('/');
+
+
 
     const [mountain, setMountain] = useState({
         name: '',
@@ -121,8 +130,6 @@ export default function AddCardMountain() {
                 </div>
 
             </form>
-
-            <img id="output" alt="photo"/>
 
         </Styles>
     );
