@@ -59,6 +59,14 @@ public class MountainController {
 
     }
 
+    @DeleteMapping("/mountain/delete/{id}")
+    public String deleteMountain(@PathVariable("id") Long id){
+        Mountain mountain = mountainRepository.findById(id).orElse(null);
+        assert mountain!=null;
+        mountainRepository.delete(mountain);
+        return "Delete";
+    }
+
 
 
 
