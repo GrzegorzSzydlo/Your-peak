@@ -25,6 +25,7 @@ export default function Home() {
         let filtr1 =  mounts.filter((mountain) =>
             mountainKeys.some((key) => mountain[key].toString().toLowerCase().indexOf(searchText.toLowerCase()) > -1));
         let filtr2 = filtr1.filter((mountain) =>
+            //searchTag.some((key) => mountain["range"].toString().toLowerCase().indexOf(key.toString().toLowerCase()) >-1));
             mountain["range"].toString().toLowerCase().indexOf(searchTag.toString().toLowerCase()) > -1);
         let filtr3 = filtr2.filter((mountain) =>
         mountain["height"] >= searchHeight[0] && mountain["height"] <= searchHeight[1]);
@@ -50,6 +51,10 @@ export default function Home() {
 
     }, []);
 
+    function changeDeleteStatus(index){
+        delete mountains[index];
+    }
+
 
     return (
         <div className="row">
@@ -58,7 +63,7 @@ export default function Home() {
             </div>
             <div className="col-9">
                 {status ? (
-                    <MountainList mountainAll={search(mountains)} />
+                    <MountainList mountainAll={search(mountains)}  changeDeleteStatus={changeDeleteStatus}/>
                 ) :
                     <div className="spinner-border" role="status">
 

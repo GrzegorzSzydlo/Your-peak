@@ -5,11 +5,10 @@ import MountainDescription from "./MountainDescription";
 import MountainViews from "../views/MountainViews";
 
 
-function MountainList({mountainAll}) {
+function MountainList({mountainAll, changeDeleteStatus}) {
 
     const [details, setDetails] = useState([]);
     const [status, setStatus] = useState(false);
-
 
     function changeStatusOnFalse() {
         setStatus(false);
@@ -17,6 +16,13 @@ function MountainList({mountainAll}) {
 
     function changeStatusOnTrue() {
         setStatus(true);
+    }
+
+    function changeDelete(id){
+        const index = mountainAll.findIndex(m => m.id ===id);
+        delete mountainAll[index];
+        changeDeleteStatus(index);
+
     }
 
 
@@ -29,12 +35,12 @@ function MountainList({mountainAll}) {
                         {
                             mountainAll.map(mountain => (
                                 <MountainDescription mountain={mountain} changeStatusOnTrue={changeStatusOnTrue}
-                                                     setDetails={setDetails}/>
+                                                     setDetails={setDetails} />
                             ))
                         }
                     </div>
                 ) : (
-                    <MountainViews changeStatusOnFalse={changeStatusOnFalse} details={details}/>
+                    <MountainViews changeStatusOnFalse={changeStatusOnFalse} details={details} changeDelete={changeDelete}/>
                 )}
             </div>
         </Styles>
